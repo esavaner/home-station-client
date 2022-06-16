@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import { API_URL } from "config";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AppContainer from "./layout/AppContainer";
+import MainPage from "./pages/MainPage";
 
 function App() {
+  const queryClient = new QueryClient();
+  axios.defaults.baseURL = API_URL;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <AppContainer>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+          </Routes>
+        </BrowserRouter>
+      </AppContainer>
+    </QueryClientProvider>
   );
 }
 

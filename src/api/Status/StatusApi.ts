@@ -1,7 +1,5 @@
-import axios from "axios";
-
-import { API_URL } from "../../../config";
+import { instance } from "api/api.config";
 import { StatusModel } from "./StatusApi.model";
 
 export const getStatus = () =>
-  axios.get<StatusModel>(`${API_URL}/status`).then(({ data }) => data);
+  instance.get<StatusModel>(`/status`).then(({ data }) => data);
