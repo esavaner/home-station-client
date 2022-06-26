@@ -1,17 +1,23 @@
-export type WindowRead = {
+export type Sensor = {
   pin: number;
-  isOpen: boolean;
   description: string;
 };
 
-export type SensorRead = {
+export type SensorRead = Sensor & {
+  isOn: boolean;
+};
+
+export type OneWire = {
   id: string;
-  temp: number;
   description: string;
+};
+
+export type OneWireRead = OneWire & {
+  temp: number;
 };
 
 export type StatusModel = {
   time: string;
   sensors: SensorRead[];
-  windows: WindowRead[];
+  onewires: OneWireRead[];
 };

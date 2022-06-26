@@ -8,5 +8,5 @@ export const useStatuQuery = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  return { ...query };
+  return query;
 };

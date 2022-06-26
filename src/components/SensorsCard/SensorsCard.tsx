@@ -13,7 +13,7 @@ const Sensors = ({ list }: SensorProps) => {
     <Card>
       {list.length > 0 && (
         <>
-          <h1>{list[0].temp.toFixed(2)}°C</h1>
+          {/* <h1>{list[0].temp.toFixed(2)}°C</h1> */}
           <h3>{list[0].description}</h3>
         </>
       )}
@@ -21,7 +21,7 @@ const Sensors = ({ list }: SensorProps) => {
         <>
           {list.slice(1).map((sens) => (
             <>
-              <h2>{sens.temp.toFixed(2)}°C</h2>
+              {/* <h2>{sens.temp.toFixed(2)}°C</h2> */}
               <h4>{sens.description}</h4>
             </>
           ))}
