@@ -9,11 +9,8 @@ const AppContainer = styled.div`
   color: ${colors.font};
   overflow: hidden;
   box-sizing: border-box;
-  background: linear-gradient(
-    45deg,
-    rgba(47, 35, 133, 1) 0%,
-    rgba(60, 188, 224, 1) 100%
-  );
+  background: linear-gradient(45deg, rgba(47, 35, 133, 1) 0%, #2c7eb9 100%);
+  font-size: 16px;
 `;
 
 export default AppContainer;

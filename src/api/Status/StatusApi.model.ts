@@ -1,6 +1,7 @@
 export type Sensor = {
   pin: number;
   description: string;
+  type: "window" | "rain";
 };
 
 export type SensorRead = Sensor & {

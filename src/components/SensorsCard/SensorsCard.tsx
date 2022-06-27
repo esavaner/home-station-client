@@ -1,33 +1,35 @@
 import { SensorRead } from "api/Status/StatusApi.model";
-import Card from "components/Card";
+import Drawer from "components/Drawer";
+import { useState } from "react";
+import * as St from "./SensorsCard.styles";
 
 export type SensorProps = {
   list?: SensorRead[];
+  loading?: boolean;
 };
 
-const Sensors = ({ list }: SensorProps) => {
-  if (!list) {
-    return <span>loading...</span>;
-  }
+const Sensors = ({ list, loading }: SensorProps) => {
+  const [drawerVisible, setDrawerVisible] = useState(false);
   return (
-    <Card>
-      {list.length > 0 && (
-        <>
-          {/* <h1>{list[0].temp.toFixed(2)}°C</h1> */}
-          <h3>{list[0].description}</h3>
-        </>
-      )}
-      {list.length > 1 && (
-        <>
-          {list.slice(1).map((sens) => (
-            <>
-              {/* <h2>{sens.temp.toFixed(2)}°C</h2> */}
-              <h4>{sens.description}</h4>
-            </>
-          ))}
-        </>
-      )}
-    </Card>
+    <>
+      <Drawer
+        $visible={drawerVisible}
+        onClose={() => setDrawerVisible(false)}
+      />
+      <St.SensorsCardSt>
+        {loading && <span>loading...</span>}
+        {!loading && list?.length === 0 && (
+          <button onClick={() => setDrawerVisible(true)}>+</button>
+        )}
+        {list && (
+          <>
+            {list.map((sensor) => (
+              <span>{sensor.description}</span>
+            ))}
+          </>
+        )}
+      </St.SensorsCardSt>
+    </>
   );
 };
 

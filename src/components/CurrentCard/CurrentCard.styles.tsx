@@ -12,6 +12,8 @@ export const Temp = styled.span`
   font-size: 20px;
 `;
 
-export const Description = styled.span`
-  font-size: 12px;
+export const Description = styled.span``;
+
+export const Image = styled.img`
+  width: 80px;
 `;

@@ -1,5 +1,5 @@
 import { Current } from "api/OneCall/OneCallApi.model";
-import { parseTemp } from "utils/utils";
+import { parseIcon, parseTemp } from "utils/utils";
 import * as St from "./CurrentCard.styles";
 
 export type CurrentCardProps = {
@@ -13,6 +13,7 @@ const CurrentCard = ({ data, loading }: CurrentCardProps) => {
       {loading && <span>loading...</span>}
       {data && (
         <>
+          <St.Image src={parseIcon(data.weather)} alt="" />
           <St.Temp>{parseTemp(data.temp)}</St.Temp>
           <St.Description>{data.weather[0].main}</St.Description>
         </>

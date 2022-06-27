@@ -15,6 +15,14 @@ export const InfoPane = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 2px;
+
+  svg {
+    font-size: 20px;
+    padding: 2px;
+    border-radius: 5px;
+    background: ${colors.font};
+  }
 `;
 
 export const Divider = styled.div`
@@ -24,9 +32,7 @@ export const Divider = styled.div`
   background: ${colors.font};
 `;
 
-export const Main = styled.span`
-  font-size: 16px;
-`;
+export const Main = styled.span``;
 
 export const Description = styled.span`
   font-size: 10px;
