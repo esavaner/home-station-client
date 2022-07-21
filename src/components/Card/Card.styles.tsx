@@ -10,8 +10,9 @@ export type CardProps = {
 const Card = styled.div<CardProps>`
   box-sizing: border-box;
   border-radius: 10px;
-  padding: 20px;
-  background: ${({ $background }) => $background || colors.card1}99;
+  padding: 5px 20px;
+  background: rgba(217, 217, 217, 0.2);
+  border: 1px solid rgba(242, 104, 94, 0.89);
 `;
 
 export default Card;

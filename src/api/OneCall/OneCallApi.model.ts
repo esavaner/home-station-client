@@ -20,8 +20,12 @@ export type Current = {
   wind_speed: number;
   wind_gust?: number;
   wind_deg: number;
-  rain?: number;
-  snow?: number;
+  rain?: {
+    "1h": number;
+  };
+  snow?: {
+    "1h": number;
+  };
   weather: Weather[];
 };
 
@@ -45,8 +49,12 @@ export type Hourly = {
   wind_deg: number;
   weather: Weather[];
   pop: number;
-  //  rain?: number;
-  //  snow?: number;
+  rain?: {
+    "1h": number;
+  };
+  snow?: {
+    "1h": number;
+  };
 };
 
 export type Daily = {
@@ -74,8 +82,12 @@ export type Daily = {
   weather: Weather[];
   clouds: number;
   pop: number;
-  rain?: number;
-  snow?: number;
+  rain?: {
+    "1h": number;
+  };
+  snow?: {
+    "1h": number;
+  };
   uvi: number;
 };
 

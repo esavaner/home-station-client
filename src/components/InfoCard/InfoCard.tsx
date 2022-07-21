@@ -25,7 +25,7 @@ const InfoCard = ({ data, loading }: InfoCardProps) => {
           <St.Divider />
           <St.InfoPane>
             <RiUmbrellaFill style={{ color: colors.green }} />
-            <St.Main>{data.rain || 0} mm</St.Main>
+            <St.Main>{data.rain?.["1h"] || 0} mm</St.Main>
             <St.Description>Opady</St.Description>
           </St.InfoPane>
           <St.Divider />

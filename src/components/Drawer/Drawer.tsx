@@ -6,7 +6,7 @@ export type DrawerProps = {
   $placing?: "left" | "right";
   $visible: boolean;
   children?: React.ReactNode;
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 const Drawer = ({ onClose, children, ...rest }: DrawerProps) => {

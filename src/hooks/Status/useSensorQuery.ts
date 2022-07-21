@@ -2,8 +2,8 @@ import { useQuery } from "react-query";
 import { ApiKeys } from "../../api/keys";
 import { StatusApi } from "../../api/Status";
 
-export const useStatusQuery = () => {
-  const query = useQuery([ApiKeys.status], () => StatusApi.getStatus(), {
+export const useSensorsQuery = () => {
+  const query = useQuery([ApiKeys.sensors], () => StatusApi.getSensors(), {
     refetchOnWindowFocus: true,
     staleTime: 5 * 60 * 1000,
   });

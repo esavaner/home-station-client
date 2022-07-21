@@ -1,5 +1,5 @@
 import { SensorRead } from "api/Status/StatusApi.model";
-import Drawer from "components/Drawer";
+import SensorsDrawer from "components/SensorsDrawer";
 import { useState } from "react";
 import * as St from "./SensorsCard.styles";
 
@@ -12,8 +12,8 @@ const Sensors = ({ list, loading }: SensorProps) => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   return (
     <>
-      <Drawer
-        $visible={drawerVisible}
+      <SensorsDrawer
+        visible={drawerVisible}
         onClose={() => setDrawerVisible(false)}
       />
       <St.SensorsCardSt>
