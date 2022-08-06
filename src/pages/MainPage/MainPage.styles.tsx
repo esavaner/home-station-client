@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { background } from "assets/images";
+import { background } from "@esavaner/home-station";
 
 export const Main = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: stretch;
-  justify-content: space-between;
+  /* align-items: stretch; */
+  /* justify-content: space-between; */
   flex-direction: column;
   position: relative;
   gap: 10px;

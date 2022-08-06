@@ -1,9 +1,9 @@
+import { colors } from "@esavaner/home-station";
 import styled, { css } from "styled-components";
-import { colors } from "styles/colors";
 
 export type DrawerStProps = {
   $placing?: "left" | "right";
-  $visible: boolean;
+  $visible?: boolean;
 };
 
 export const DrawerSt = styled.div<DrawerStProps>`
@@ -41,7 +41,7 @@ export const InnerDrawer = styled.div`
   padding-top: 20px;
 `;
 
-export const CancelButton = styled.button`
+export const CancelButton = styled.button<DrawerStProps>`
   background: none;
   border: none;
   outline: none;
@@ -52,4 +52,9 @@ export const CancelButton = styled.button`
   gap: 20px;
   font-size: 20px;
   width: 100%;
+  ${({ $placing }) =>
+    $placing === "left" &&
+    css`
+      flex-direction: row-reverse;
+    `}
 `;

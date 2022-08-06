@@ -1,31 +1,33 @@
-import CurrentCard from "components/CurrentCard";
-import ForecastCard from "components/ForecastCard";
-import InfoCard from "components/InfoCard";
-import OneWires from "components/OneWiresCard";
-import SensorsCard from "components/SensorsCard";
+import ForecastCard from "components/Cards/ForecastCard";
+import InfoCard from "components/Cards/InfoCard";
+
 import { useOneCallQuery } from "hooks/OneCall";
 
-import { useStatusQuery } from "hooks/Status";
-import Col from "layout/Col";
-import Row from "layout/Row";
-
 import * as St from "./MainPage.styles";
+import HeaderInfo from "components/HeaderInfo";
+import AddCard from "components/Cards/AddCard";
 
 const MainPage = () => {
-  const { data: status, isLoading: statusLoading } = useStatusQuery();
   const { data: onecall, isLoading: onecallLoading } = useOneCallQuery();
+
+  const currentLoading = {
+    data: onecall?.current,
+    loading: onecallLoading,
+  };
 
   return (
     <St.Main>
-      <InfoCard data={onecall?.current} loading={onecallLoading} />
+      <HeaderInfo {...currentLoading} />
+      <InfoCard {...currentLoading} />
       <ForecastCard data={onecall?.hourly} loading={onecallLoading} />
-      <Row style={{ justifyContent: "space-between", flex: 1, gap: "20px" }}>
+      {/* <Row style={{ justifyContent: "space-between", flex: 1, gap: "20px" }}>
         <OneWires list={status?.onewires} loading={statusLoading} />
         <Col>
-          <CurrentCard data={onecall?.current} loading={onecallLoading} />
-          <SensorsCard list={status?.sensors} loading={statusLoading} />
+          <CurrentCard {...currentLoading} />
+          <SensorsCard list={status?.sensors} loading={statusLoading} /> 
         </Col>
-      </Row>
+      </Row> */}
+      <AddCard />
     </St.Main>
   );
 };

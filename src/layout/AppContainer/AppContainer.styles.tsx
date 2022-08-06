@@ -1,5 +1,5 @@
+import { colors } from "@esavaner/home-station";
 import styled from "styled-components";
-import { colors } from "styles/colors";
 
 const AppContainer = styled.div`
   display: flex;
