@@ -2,7 +2,7 @@
 
 React website for home station project
 
-![designs]('./src/assets/designs.png)
+![designs](/src/assets/designs.png)
 
 # How to
 
@@ -32,7 +32,7 @@ Whole project consists of 5 main repositories, each having different purpose:
 
 Chart showing how packages interact with each other
 
-![project connections]('./src/assets/connections.png)
+![project connections](/src/assets/connections.png)
 
 # Website designs
 
