@@ -8,6 +8,7 @@ export type DrawerStProps = {
 
 export const DrawerSt = styled.div<DrawerStProps>`
   position: absolute;
+  overflow-y: auto;
   height: 100%;
   width: 80%;
   padding: 20px;

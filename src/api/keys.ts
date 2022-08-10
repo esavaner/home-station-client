@@ -5,4 +5,5 @@ export const ApiKeys = {
   location: "location",
   controller: "controller",
   read: "read",
+  checkIp: "checkIp",
 };

@@ -22,3 +22,8 @@ export const updatewController = (con: Controller) =>
   instance
     .put<Controller>("/controller", { controller: con })
     .then(({ data }) => data);
+
+export const getCheckIp = (ip: string) =>
+  instance
+    .get<string>(`${ip.startsWith("http" ? ip : "http://" + ip)}/check`)
+    .then(({ data }) => data);

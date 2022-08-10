@@ -1,7 +1,7 @@
 import { Location } from "@esavaner/home-station";
 import Button from "components/Button";
 import Drawer from "components/Drawer";
-import Input from "components/Input";
+import Input from "components/Form/Input";
 import Spinner from "components/Spinner";
 import { useLocationSet } from "hooks/Location";
 import { useEffect } from "react";
@@ -36,7 +36,7 @@ const LocationDrawer = ({
       setValue("lat", location.lat);
       setValue("lon", location.lon);
     }
-  }, [location]);
+  }, [location, setValue]);
 
   const submit = (values: Location) => {
     console.log(values);
@@ -52,8 +52,8 @@ const LocationDrawer = ({
         <label>szerokość (lat)</label>
         <Input {...register("lat", { required: true })} />
 
+        <Button type="submit">Ustaw</Button>
         <St.Info>
-          <Button type="submit">Ustaw</Button>
           {isLoading && <Spinner />}
           {isSuccess && <>Ustawiono!</>}
           {isError && <>{error}</>}
