@@ -3,12 +3,15 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 20px;
 `;
 
 export const ControllerForm = styled.form`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const Divider = styled.div`
@@ -17,15 +20,13 @@ export const Divider = styled.div`
   width: 100%;
 `;
 
-export const Center = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
+export const Header = styled.div`
+  font-size: 20px;
 `;
 
-export const Header = styled.div`
+export const IpCheck = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
-  width: 100%;
-  font-size: 20px;
+  gap: 10px;
 `;

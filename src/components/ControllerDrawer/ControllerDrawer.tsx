@@ -3,11 +3,14 @@ import Button from "components/Button";
 import Drawer from "components/Drawer";
 import Input from "components/Form/Input";
 import Icon from "components/Icon";
+
 import { useControllerAdd } from "hooks/Controller";
+
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 // import { useSensorQuery } from "hooks/Status";
 import * as St from "./ControllerDrawer.styles";
+import IpCheckPane from "./IpCheckPane";
 import SensorForm from "./SensorForm";
 import SensorPane from "./SensorPane";
 
@@ -26,7 +29,7 @@ const SensorsDrawer = ({
 }: SensorsDrawerProps) => {
   const [sensorList, setSensorList] = useState<Sensor[]>([]);
   const [sensorEdit, setSensorEdit] = useState(false);
-  const [ipChecked, setIpChecked] = useState(false);
+  const [ip, setIp] = useState("");
   const { mutate: addController } = useControllerAdd();
 
   const {
@@ -60,9 +63,8 @@ const SensorsDrawer = ({
   };
 
   const checkIp = () => {
-    // chceck ip
     const ip = cGetValues("ip");
-    setIpChecked(true);
+    setIp(ip);
   };
 
   useEffect(() => {
@@ -72,6 +74,8 @@ const SensorsDrawer = ({
       setSensorList(edited.sensors);
     } else {
       cReset();
+      setIp("");
+      setSensorEdit(false);
     }
   }, [edited, visible, cReset, cSetValue]);
 
@@ -81,15 +85,14 @@ const SensorsDrawer = ({
         <St.ControllerForm onSubmit={cHandleSubmit(save)}>
           <label>Nazwa kontrolera</label>
           <Input {...cRegister("name", { required: true })} />
-          <label>Ip kontrolera</label>
-          <Input {...cRegister("ip", { required: true })} />
-          {edited ? (
-            <Button type="submit">Zapisz</Button>
-          ) : ipChecked ? (
-            <Button type="submit">Dodaj czujnik</Button>
-          ) : (
-            <Button onClick={checkIp}>Sprawdź IP</Button>
-          )}
+          <label>IP kontrolera</label>
+          <St.IpCheck>
+            <Input {...cRegister("ip", { required: true })} />
+            <IpCheckPane onCheck={checkIp} ip={ip} />
+          </St.IpCheck>
+          <Button style={{ margin: "20px auto 0" }} $fill type="submit">
+            {edited ? "Zapisz kontroller" : "Dodaj kontroller"}
+          </Button>
         </St.ControllerForm>
         <St.Divider />
         <St.Header>Lista czujników:</St.Header>
@@ -103,9 +106,7 @@ const SensorsDrawer = ({
         {sensorEdit ? (
           <SensorForm onSave={submitSensor} type="create" onCancel={cancel} />
         ) : (
-          <St.Center>
-            <Icon onClick={() => setSensorEdit(true)} src={plus_sign} />
-          </St.Center>
+          <Icon onClick={() => setSensorEdit(true)} src={plus_sign} />
         )}
       </St.Container>
     </Drawer>

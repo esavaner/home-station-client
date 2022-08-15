@@ -47,12 +47,14 @@ const LocationDrawer = ({
       <St.LocationForm onSubmit={handleSubmit(submit)}>
         <label>Miasto</label>
         <Input {...register("name", { required: true })} />
-        <label>długość (lon)</label>
+        <label>Długość (lon)</label>
         <Input {...register("lon", { required: true })} />
-        <label>szerokość (lat)</label>
+        <label>Szerokość (lat)</label>
         <Input {...register("lat", { required: true })} />
 
-        <Button type="submit">Ustaw</Button>
+        <Button style={{ margin: "20px auto" }} type="submit">
+          Ustaw
+        </Button>
         <St.Info>
           {isLoading && <Spinner />}
           {isSuccess && <>Ustawiono!</>}

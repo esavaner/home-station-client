@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const ButtonPane = styled.div`
