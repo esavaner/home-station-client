@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { FiTrash2 } from "react-icons/fi";
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,12 +16,6 @@ export const ControllerForm = styled.form`
   width: 100%;
 `;
 
-export const Divider = styled.div`
-  background: rgba(217, 217, 217, 0.7);
-  height: 1px;
-  width: 100%;
-`;
-
 export const Header = styled.div`
   font-size: 20px;
 `;
@@ -29,4 +25,10 @@ export const IpCheck = styled.div`
   align-items: center;
   justify-content: center;
   gap: 10px;
+`;
+
+export const Trash = styled(FiTrash2)`
+  width: 30px;
+  height: 30px;
+  color: rgba(242, 104, 94, 0.89);
 `;

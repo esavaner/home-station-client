@@ -9,7 +9,7 @@ export type CardProps = {
 const Card = styled.div<CardProps>`
   box-sizing: border-box;
   border-radius: 10px;
-  padding: 5px 20px;
+  padding: 10px 20px;
   background: rgba(217, 217, 217, 0.2);
   border: 1px solid rgba(242, 104, 94, 0.89);
 `;

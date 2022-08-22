@@ -1,11 +1,12 @@
 import { Sensor } from "@esavaner/home-station";
+import Confirm from "components/Confirm";
 import { useState } from "react";
 import SensorForm from "../SensorForm";
 import * as St from "./SensorPane.styles";
 
 type Props = {
   sensor: Sensor;
-  onDelete?: (sens: Sensor) => void;
+  onDelete: () => void;
   onEditSave: (sens: Sensor) => void;
 };
 
@@ -23,12 +24,17 @@ const SensorPane = ({ sensor, onDelete, onEditSave }: Props) => {
   return (
     <>
       {edit ? (
-        <SensorForm type="edit" onSave={save} onCancel={cancel} />
+        <SensorForm
+          type="edit"
+          onSave={save}
+          onCancel={cancel}
+          edited={sensor}
+        />
       ) : (
         <St.SensorTile>
           <span>{sensor.description}</span>
           <St.Edit onClick={() => setEdit(true)} />
-          <St.Delete />
+          <Confirm icon={<St.Delete />} onOk={() => onDelete()} />
         </St.SensorTile>
       )}
     </>

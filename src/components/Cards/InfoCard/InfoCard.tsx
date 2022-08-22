@@ -4,6 +4,7 @@ import { FiWind } from "react-icons/fi";
 import { RiUmbrellaFill } from "react-icons/ri";
 import { GiWaterDrop } from "react-icons/gi";
 import { Current, colors } from "@esavaner/home-station";
+import Divider from "components/Divider";
 
 export type InfoCardProps = {
   data?: Current;
@@ -21,13 +22,13 @@ const InfoCard = ({ data, loading }: InfoCardProps) => {
             <FiWind style={{ color: colors.violet }} />
             <St.Main>{data.wind_speed} km/h</St.Main>
           </St.InfoPane>
-          <St.Divider />
+          <Divider />
           <St.InfoPane>
             <St.Description>Opady</St.Description>
             <RiUmbrellaFill style={{ color: colors.green }} />
             <St.Main>{data.rain?.["1h"] || 0} mm</St.Main>
           </St.InfoPane>
-          <St.Divider />
+          <Divider />
           <St.InfoPane>
             <St.Description>Wilgotność</St.Description>
             <GiWaterDrop style={{ color: colors.blue }} />

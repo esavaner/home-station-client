@@ -2,7 +2,7 @@ import { Controller } from "@esavaner/home-station";
 import { instance } from "api/api.config";
 
 export const getControllers = () =>
-  instance.get<Controller>("/controller").then(({ data }) => data);
+  instance.get<Controller[]>("/controller").then(({ data }) => data);
 
 export const addController = (con: Controller) =>
   instance

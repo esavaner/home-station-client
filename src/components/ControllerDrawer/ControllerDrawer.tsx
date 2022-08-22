@@ -1,10 +1,16 @@
 import { Controller, plus_sign, Sensor } from "@esavaner/home-station";
 import Button from "components/Button";
+import Confirm from "components/Confirm";
+import Divider from "components/Divider";
 import Drawer from "components/Drawer";
 import Input from "components/Form/Input";
 import Icon from "components/Icon";
 
-import { useControllerAdd } from "hooks/Controller";
+import {
+  useControllerAdd,
+  useControllerDelete,
+  useControllerUpdate,
+} from "hooks/Controller";
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,23 +20,25 @@ import IpCheckPane from "./IpCheckPane";
 import SensorForm from "./SensorForm";
 import SensorPane from "./SensorPane";
 
-export type SensorsDrawerProps = {
+export type ControllerDrawerProps = {
   visible: boolean;
   onClose?: () => void;
   onOk?: () => void;
   edited?: Controller;
 };
 
-const SensorsDrawer = ({
+const ControllerDrawer = ({
   visible,
   onClose,
   onOk,
   edited,
-}: SensorsDrawerProps) => {
+}: ControllerDrawerProps) => {
   const [sensorList, setSensorList] = useState<Sensor[]>([]);
-  const [sensorEdit, setSensorEdit] = useState(false);
+  const [sensorCreation, setSensorCreation] = useState(false);
   const [ip, setIp] = useState("");
   const { mutate: addController } = useControllerAdd();
+  const { mutate: updateController } = useControllerUpdate();
+  const { mutate: deleteController } = useControllerDelete();
 
   const {
     register: cRegister,
@@ -40,27 +48,55 @@ const SensorsDrawer = ({
     getValues: cGetValues,
   } = useForm<Controller>();
 
+  /*********************************************/
+  /* controller */
+
+  const save = (con: Controller) => {
+    const newCon: Controller = {
+      ...con,
+      sensors: sensorList,
+    };
+    if (edited) {
+      updateController(newCon);
+    } else {
+      addController(newCon);
+    }
+  };
+
+  const deleteC = () => {
+    edited && deleteController(edited?.ip);
+  };
+
+  /*********************************************/
+  /* sensor */
+
+  const cancel = () => {
+    setSensorCreation(false);
+  };
+
   const submitSensor = (sens: Sensor) => {
-    setSensorEdit(false);
+    setSensorCreation(false);
     setSensorList((prev) => [...prev, sens]);
   };
 
-  const save = (con: Controller) => {
-    if (edited) {
-      //update
-    } else {
-      const newCon: Controller = {
-        ...con,
-        sensors: sensorList,
-      };
-      addController(newCon);
-    }
-    console.log(con);
+  const deleteSensor = (index: number) => {
+    setSensorList((oldList) => {
+      const newList = [...oldList];
+      newList.splice(index, 1);
+      return newList;
+    });
   };
 
-  const cancel = () => {
-    setSensorEdit(false);
+  const updateSensor = (sens: Sensor, index: number) => {
+    setSensorList((oldList) => {
+      const newList = [...oldList];
+      newList[index] = sens;
+      return newList;
+    });
   };
+
+  /*********************************************/
+  /* other */
 
   const checkIp = () => {
     const ip = cGetValues("ip");
@@ -75,12 +111,18 @@ const SensorsDrawer = ({
     } else {
       cReset();
       setIp("");
-      setSensorEdit(false);
+      setSensorList([]);
     }
+    setSensorCreation(false);
   }, [edited, visible, cReset, cSetValue]);
 
   return (
-    <Drawer $visible={visible} onClose={onClose} $placing="right">
+    <Drawer
+      $visible={visible}
+      onClose={onClose}
+      $placing="right"
+      header={edited && <Confirm icon={<St.Trash />} onOk={deleteC} />}
+    >
       <St.Container>
         <St.ControllerForm onSubmit={cHandleSubmit(save)}>
           <label>Nazwa kontrolera</label>
@@ -94,23 +136,24 @@ const SensorsDrawer = ({
             {edited ? "Zapisz kontroller" : "Dodaj kontroller"}
           </Button>
         </St.ControllerForm>
-        <St.Divider />
+        <Divider mode="horizontal" />
         <St.Header>Lista czujników:</St.Header>
         {sensorList.map((sens, index) => (
           <SensorPane
             key={sens.description + index}
             sensor={sens}
-            onEditSave={(sens) => console.log(sens)}
+            onEditSave={(sens) => updateSensor(sens, index)}
+            onDelete={() => deleteSensor(index)}
           />
         ))}
-        {sensorEdit ? (
+        {sensorCreation ? (
           <SensorForm onSave={submitSensor} type="create" onCancel={cancel} />
         ) : (
-          <Icon onClick={() => setSensorEdit(true)} src={plus_sign} />
+          <Icon onClick={() => setSensorCreation(true)} src={plus_sign} />
         )}
       </St.Container>
     </Drawer>
   );
 };
 
-export default SensorsDrawer;
+export default ControllerDrawer;

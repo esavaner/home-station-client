@@ -7,15 +7,14 @@ export type DrawerStProps = {
 };
 
 export const DrawerSt = styled.div<DrawerStProps>`
-  position: absolute;
   overflow-y: auto;
   height: 100%;
   width: 80%;
   padding: 20px;
-  top: 0;
   transition: all 0.3s;
   background: ${colors.black}DD;
-  backdrop-filter: blur(8px);
+  box-sizing: border-box;
+  border-radius: 10px;
   ${({ $visible, $placing }) =>
     $visible
       ? css`
@@ -31,10 +30,10 @@ export const DrawerSt = styled.div<DrawerStProps>`
   ${({ $placing }) =>
     $placing === "left"
       ? css`
-          left: 0;
+          margin-right: auto;
         `
       : css`
-          right: 0;
+          margin-left: auto;
         `};
 `;
 
@@ -48,14 +47,20 @@ export const CancelButton = styled.button<DrawerStProps>`
   outline: none;
   color: ${colors.font};
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
   gap: 20px;
   font-size: 20px;
-  width: 100%;
+
   ${({ $placing }) =>
     $placing === "left" &&
     css`
       flex-direction: row-reverse;
     `}
+`;
+
+export const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+  width: 100%;
 `;

@@ -25,13 +25,6 @@ export const InfoPane = styled.div`
   }
 `;
 
-export const Divider = styled.div`
-  min-height: 35px;
-  height: 70%;
-  width: 1px;
-  background: ${colors.font};
-`;
-
 export const Main = styled.span``;
 
 export const Description = styled.span`
