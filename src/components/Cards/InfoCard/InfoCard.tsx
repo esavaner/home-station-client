@@ -1,41 +1,33 @@
 import * as St from "./InfoCard.styles";
-
-import { FiWind } from "react-icons/fi";
-import { RiUmbrellaFill } from "react-icons/ri";
-import { GiWaterDrop } from "react-icons/gi";
-import { Current, colors } from "@esavaner/home-station";
+import { Current, humidity, umbrella, wind } from "@esavaner/home-station";
 import Divider from "components/Divider";
+import Icon from "components/Icon";
 
 export type InfoCardProps = {
   data?: Current;
   loading?: boolean;
 };
 
-const InfoCard = ({ data, loading }: InfoCardProps) => {
+const InfoCard = ({ data }: InfoCardProps) => {
   return (
-    <St.InfoCardSt $background={colors.card5}>
-      {loading && <span>loading...</span>}
-      {data && (
-        <>
-          <St.InfoPane>
-            <St.Description>Wiatr</St.Description>
-            <FiWind style={{ color: colors.violet }} />
-            <St.Main>{data.wind_speed} km/h</St.Main>
-          </St.InfoPane>
-          <Divider />
-          <St.InfoPane>
-            <St.Description>Opady</St.Description>
-            <RiUmbrellaFill style={{ color: colors.green }} />
-            <St.Main>{data.rain?.["1h"] || 0} mm</St.Main>
-          </St.InfoPane>
-          <Divider />
-          <St.InfoPane>
-            <St.Description>Wilgotność</St.Description>
-            <GiWaterDrop style={{ color: colors.blue }} />
-            <St.Main>{data.humidity}%</St.Main>
-          </St.InfoPane>
-        </>
-      )}
+    <St.InfoCardSt>
+      <St.InfoPane>
+        <St.Description>Wiatr</St.Description>
+        <Icon src={wind} />
+        <St.Info>{data ? data.wind_speed : "-"} km/h</St.Info>
+      </St.InfoPane>
+      <Divider />
+      <St.InfoPane>
+        <St.Description>Opady</St.Description>
+        <Icon src={umbrella} />
+        <St.Info>{data ? data.rain?.["1h"] || 0 : "-"} mm</St.Info>
+      </St.InfoPane>
+      <Divider />
+      <St.InfoPane>
+        <St.Description>Wilgotność</St.Description>
+        <Icon src={humidity} />
+        <St.Info>{data ? data.humidity : "-"}%</St.Info>
+      </St.InfoPane>
     </St.InfoCardSt>
   );
 };

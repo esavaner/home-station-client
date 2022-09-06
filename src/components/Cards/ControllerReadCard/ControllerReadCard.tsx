@@ -12,20 +12,20 @@ import Divider from "components/Divider";
 
 type Props = {
   controller: ControllerRead;
-  onEdit: (con: ControllerRead) => void;
+  onEdit: (ip: string) => void;
 };
 
 const ControllerReadCard = ({ controller, onEdit }: Props) => {
-  const tempIcon = parseTempIcon(parseFloat(controller.temp));
+  const tempIcon = parseTempIcon(controller.temp);
   return (
-    <St.ControllerCard onClick={() => onEdit(controller)}>
+    <St.ControllerCard onClick={() => onEdit(controller.ip)}>
       <SensorColumn desc={controller.name}>
-        <Icon size="40px" src={microcontroller} />
+        <Icon size="50px" src={microcontroller} />
       </SensorColumn>
       <Divider />
       <SensorColumn desc="Temp. sys.">
-        <Icon src={tempIcon} />
-        <span>{parseTemp(parseFloat(controller.temp))}</span>
+        <Icon size="40px" src={tempIcon} />
+        <St.State>{parseTemp(controller.temp)}</St.State>
       </SensorColumn>
       {controller.sensors.map((sensor) => {
         const { icon, state } = parseSensorIcon(sensor);
@@ -33,8 +33,8 @@ const ControllerReadCard = ({ controller, onEdit }: Props) => {
           <React.Fragment key={sensor.pin + sensor.description}>
             <Divider />
             <SensorColumn desc={sensor.description}>
-              <Icon src={icon} />
-              <span style={{ textTransform: "uppercase" }}>{state}</span>
+              <Icon size="40px" src={icon} />
+              <St.State>{state}</St.State>
             </SensorColumn>
           </React.Fragment>
         );

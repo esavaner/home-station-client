@@ -2,7 +2,18 @@ import { Controller } from "@esavaner/home-station";
 import { instance } from "api/api.config";
 
 export const getControllers = () =>
-  instance.get<Controller[]>("/controller").then(({ data }) => data);
+  instance.get<Controller[]>("/controllers").then(({ data }) => data);
+
+export const getController = (con_ip?: string) =>
+  con_ip
+    ? instance
+        .get<Controller>("/controller", {
+          params: {
+            controller_ip: con_ip,
+          },
+        })
+        .then(({ data }) => data)
+    : Promise.resolve(null);
 
 export const addController = (con: Controller) =>
   instance

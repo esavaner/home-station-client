@@ -1,3 +1,4 @@
+import { theme } from "@esavaner/home-station";
 import styled, { css } from "styled-components";
 
 type Props = {
@@ -5,7 +6,8 @@ type Props = {
 };
 
 const Divider = styled.div<Props>`
-  background: rgba(217, 217, 217, 0.7);
+  flex-shrink: 0;
+  background: ${theme.colors.neutral[2]};
   ${({ mode }) =>
     mode === "horizontal"
       ? css`

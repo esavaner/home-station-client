@@ -6,6 +6,7 @@ export const Container = styled.div`
   height: 100%;
   justify-content: center;
   text-align: center;
+  flex-shrink: 0;
 `;
 
 export const Info = styled.div`
@@ -18,5 +19,5 @@ export const Info = styled.div`
 `;
 
 export const Desc = styled.span`
-  font-size: 12px;
+  white-space: nowrap;
 `;

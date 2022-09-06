@@ -1,5 +1,6 @@
-import { parseIcon, parseTemp, Hourly } from "@esavaner/home-station";
+import { parseIcon, parseTemp, Hourly, theme } from "@esavaner/home-station";
 import * as St from "./ForecastCard.styles";
+import { GiWaterDrop } from "react-icons/gi";
 
 export type ForecastCardProps = {
   data?: Hourly[];
@@ -21,7 +22,12 @@ const ForecastCard = ({ data, loading }: ForecastCardProps) => {
               <St.Hour>{getHour(hour.dt)}</St.Hour>
               <St.Image src={parseIcon(hour.weather)} alt="" />
               <span>{parseTemp(hour.temp, 0)}</span>
-              <St.Humidity>{hour.humidity}%</St.Humidity>
+              <St.Pop>
+                <GiWaterDrop
+                  style={{ color: theme.colors.blue, marginBottom: 1 }}
+                />{" "}
+                {(hour.pop * 100).toFixed()}%
+              </St.Pop>
             </St.HourPane>
           ))}
         </>

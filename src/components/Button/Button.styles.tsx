@@ -1,3 +1,4 @@
+import { theme } from "@esavaner/home-station";
 import styled, { css } from "styled-components";
 
 type Props = {
@@ -5,35 +6,34 @@ type Props = {
 };
 
 const Button = styled.button<Props>`
-  border: 2px solid rgba(242, 104, 94, 0.89);
+  border: 2px solid ${theme.colors.pink};
   height: 27px;
   padding: 0px 10px;
   border-radius: 7px;
   font-weight: bold;
-  font-size: 16px;
   width: fit-content;
   ${({ $fill }) =>
     $fill
       ? css`
-          color: rgb(230, 230, 230);
-          background: rgba(242, 104, 94, 0.89);
+          color: ${theme.colors.neutral[2]};
+          background: ${theme.colors.pink};
         `
       : css`
-          color: rgba(242, 104, 94, 0.89);
+          color: ${theme.colors.pink};
           background: transparent;
         `}
 
   &:disabled {
-    border: 2px solid rgb(100, 100, 100);
+    border: 2px solid ${theme.colors.neutral[4]};
     cursor: not-allowed;
     ${({ $fill }) =>
       $fill
         ? css`
             color: initial;
-            background: rgb(100, 100, 100);
+            background: ${theme.colors.neutral[4]};
           `
         : css`
-            color: rgb(100, 100, 100);
+            color: ${theme.colors.neutral[4]};
             background: transparent;
           `}
   }

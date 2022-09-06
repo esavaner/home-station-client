@@ -8,53 +8,58 @@ import HeaderInfo from "components/HeaderInfo";
 import ControllerReadCard from "components/Cards/ControllerReadCard";
 import { useReadQuery } from "hooks/Read/useReadQuery";
 import ControllerDrawer from "components/ControllerDrawer";
-import { useState } from "react";
-import { Controller, ControllerRead, plus_sign } from "@esavaner/home-station";
+import { useCallback, useState } from "react";
+import { parseDate, plus_sign } from "@esavaner/home-station";
 import Icon from "components/Icon";
 
 const MainPage = () => {
   const [conDrawerVisible, setConDrawerVisible] = useState(false);
-  const [editedController, setEditedController] = useState<Controller>();
+  const [editedIp, setEditedIp] = useState<string>();
   const { data: onecall, isLoading: onecallLoading } = useOneCallQuery();
-  const { data: controllers } = useReadQuery();
+  const { data: controllers, refetch } = useReadQuery();
 
   const currentLoading = {
     data: onecall?.current,
     loading: onecallLoading,
   };
 
-  const close = () => {
+  const close = useCallback(() => {
     setConDrawerVisible(false);
-  };
+    refetch();
+  }, [refetch]);
 
   const open = () => {
-    setEditedController(undefined);
+    setEditedIp(undefined);
     setConDrawerVisible(true);
   };
 
-  const edit = (con: ControllerRead) => {
-    setEditedController(con);
+  const edit = (ip: string) => {
+    setEditedIp(ip);
     setConDrawerVisible(true);
   };
 
   return (
     <St.Main>
-      <HeaderInfo {...currentLoading} />
-      <InfoCard {...currentLoading} />
-      <ForecastCard data={onecall?.hourly} loading={onecallLoading} />
-      {controllers?.map((con) => (
-        <ControllerReadCard key={con.ip} controller={con} onEdit={edit} />
-      ))}
-      <St.AddCard>
-        <Icon onClick={open} src={plus_sign} />
-        Dodaj
-      </St.AddCard>
+      <St.Content>
+        <HeaderInfo {...currentLoading} />
+        <InfoCard {...currentLoading} />
+        <ForecastCard data={onecall?.hourly} loading={onecallLoading} />
+        <span>Ostatnia aktualizacja: {parseDate(controllers?.[0]?.time)}</span>
+        {controllers?.map((con) => (
+          <ControllerReadCard key={con.ip} controller={con} onEdit={edit} />
+        ))}
+        <St.AddCard>
+          <Icon onClick={open} src={plus_sign} />
+          Dodaj
+        </St.AddCard>
 
-      <ControllerDrawer
-        visible={conDrawerVisible}
-        onClose={close}
-        edited={editedController}
-      />
+        <ControllerDrawer
+          visible={conDrawerVisible}
+          onClose={close}
+          onOk={close}
+          con_ip={editedIp}
+        />
+      </St.Content>
     </St.Main>
   );
 };

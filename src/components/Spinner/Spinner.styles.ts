@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { FiSun } from "react-icons/fi";
+import { theme } from "@esavaner/home-station";
 
 const Spinner = styled(FiSun)`
-  color: rgba(242, 104, 94, 0.89);
+  color: ${theme.colors.pink};
   animation: 1.2s infinite spin;
   font-size: 20px;
 

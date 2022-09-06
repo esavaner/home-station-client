@@ -1,3 +1,4 @@
+import { theme } from "@esavaner/home-station";
 import styled from "styled-components";
 
 export type CardProps = {
@@ -11,7 +12,7 @@ const Card = styled.div<CardProps>`
   border-radius: 10px;
   padding: 10px 20px;
   background: rgba(217, 217, 217, 0.2);
-  border: 1px solid rgba(242, 104, 94, 0.89);
+  border: 1px solid ${theme.colors.pink};
 `;
 
 export default Card;

@@ -1,4 +1,3 @@
-import { colors } from "@esavaner/home-station";
 import Card from "components/Cards/Card";
 import styled from "styled-components";
 
@@ -16,17 +15,8 @@ export const InfoPane = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 2px;
-
-  svg {
-    font-size: 20px;
-    padding: 2px;
-    border-radius: 5px;
-    background: ${colors.font};
-  }
 `;
 
-export const Main = styled.span``;
+export const Info = styled.span``;
 
-export const Description = styled.span`
-  font-size: 10px;
-`;
+export const Description = styled.span``;

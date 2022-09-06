@@ -1,10 +1,12 @@
+import { theme } from "@esavaner/home-station";
 import styled from "styled-components";
 import Card from "../Card";
 
 export const ControllerCard = styled(Card)`
   display: flex;
-  align-items: center;
   gap: 15px;
+  width: 100%;
+  overflow-x: auto;
 `;
 
 export const CardCol = styled.div`
@@ -15,6 +17,7 @@ export const CardCol = styled.div`
   height: 100%;
 `;
 
-export const TempRead = styled.span`
-  font-size: 24px;
+export const State = styled.span`
+  font-size: ${theme.fonts[20]};
+  white-space: nowrap;
 `;

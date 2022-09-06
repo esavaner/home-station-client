@@ -23,6 +23,8 @@ export const Hour = styled.span`
   font-size: 12px;
 `;
 
-export const Humidity = styled.span`
+export const Pop = styled.span`
+  display: flex;
   font-size: 12px;
+  align-items: flex-end;
 `;

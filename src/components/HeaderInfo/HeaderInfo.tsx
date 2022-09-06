@@ -13,15 +13,15 @@ export type HeaderInfoProps = {
   loading?: boolean;
 };
 
-const HeaderInfo = ({ data, loading }: HeaderInfoProps) => {
+const HeaderInfo = ({ data }: HeaderInfoProps) => {
   const [locDrawerVisible, setLocDrawerVisible] = useState(false);
-  const { data: location, isLoading } = useLocationQuery();
+  const { data: location, isFetching } = useLocationQuery();
   return (
     <>
       <St.HeaderWrap>
         <St.LocationWrap onClick={() => setLocDrawerVisible(true)}>
-          {isLoading && <>Loading...</>}
-          {!isLoading && location ? location.name : "Ustaw miasto"}
+          {isFetching && <>Loading...</>}
+          {!isFetching ? (location ? location.name : "Ustaw miasto") : ""}
           <MdOutlineLocationOn />
         </St.LocationWrap>
         <St.CurrentWrap>

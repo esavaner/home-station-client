@@ -1,4 +1,4 @@
-import { colors } from "@esavaner/home-station";
+import { theme } from "@esavaner/home-station";
 import styled, { css } from "styled-components";
 
 export type DrawerStProps = {
@@ -10,9 +10,10 @@ export const DrawerSt = styled.div<DrawerStProps>`
   overflow-y: auto;
   height: 100%;
   width: 80%;
+  max-width: 800px;
   padding: 20px;
   transition: all 0.3s;
-  background: ${colors.black}DD;
+  background: ${theme.colors.neutral[0]}DD;
   box-sizing: border-box;
   border-radius: 10px;
   ${({ $visible, $placing }) =>
@@ -45,7 +46,7 @@ export const CancelButton = styled.button<DrawerStProps>`
   background: none;
   border: none;
   outline: none;
-  color: ${colors.font};
+  color: ${theme.colors.neutral[1]};
   display: flex;
   gap: 20px;
   font-size: 20px;

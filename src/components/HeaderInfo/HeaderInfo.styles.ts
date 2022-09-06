@@ -1,3 +1,4 @@
+import { theme } from "@esavaner/home-station";
 import styled from "styled-components";
 
 export const HeaderWrap = styled.div`
@@ -8,7 +9,7 @@ export const HeaderWrap = styled.div`
 export const LocationWrap = styled.span`
   font-size: 30px;
   font-weight: bold;
-  color: rgba(242, 104, 94, 0.89);
+  color: ${theme.colors.pink};
   svg {
     position: relative;
     top: 5px;

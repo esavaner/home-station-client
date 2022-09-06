@@ -5,13 +5,14 @@ import {
   AiFillCloseCircle,
   AiFillQuestionCircle,
 } from "react-icons/ai";
+import { theme } from "@esavaner/home-station";
 
 export const Success = styled(AiFillCheckCircle)`
-  color: #43a047;
+  color: ${theme.colors.green};
 `;
 
 export const Fail = styled(AiFillCloseCircle)`
-  color: #d32f2f;
+  color: ${theme.colors.red};
 `;
 
 export const Unknown = styled(AiFillQuestionCircle)`

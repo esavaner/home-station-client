@@ -10,6 +10,7 @@ import {
   useControllerAdd,
   useControllerDelete,
   useControllerUpdate,
+  useControllerQuery,
 } from "hooks/Controller";
 
 import { useEffect, useState } from "react";
@@ -23,22 +24,35 @@ import SensorPane from "./SensorPane";
 export type ControllerDrawerProps = {
   visible: boolean;
   onClose?: () => void;
-  onOk?: () => void;
-  edited?: Controller;
+  onOk: () => void;
+  con_ip?: string;
 };
 
 const ControllerDrawer = ({
   visible,
   onClose,
   onOk,
-  edited,
+  con_ip,
 }: ControllerDrawerProps) => {
   const [sensorList, setSensorList] = useState<Sensor[]>([]);
   const [sensorCreation, setSensorCreation] = useState(false);
   const [ip, setIp] = useState("");
-  const { mutate: addController } = useControllerAdd();
-  const { mutate: updateController } = useControllerUpdate();
-  const { mutate: deleteController } = useControllerDelete();
+  const {
+    mutate: addController,
+    isError: isAddError,
+    isSuccess: isAddSuccess,
+  } = useControllerAdd();
+  const {
+    mutate: updateController,
+    isError: isUpdateError,
+    isSuccess: isUpdateSuccess,
+  } = useControllerUpdate();
+  const {
+    mutate: deleteController,
+    isError: isDeleteError,
+    isSuccess: isDeleteSuccess,
+  } = useControllerDelete();
+  const { data: edited, refetch } = useControllerQuery(con_ip);
 
   const {
     register: cRegister,
@@ -104,7 +118,7 @@ const ControllerDrawer = ({
   };
 
   useEffect(() => {
-    if (edited) {
+    if (edited && con_ip) {
       cSetValue("name", edited.name);
       cSetValue("ip", edited.ip);
       setSensorList(edited.sensors);
@@ -114,7 +128,34 @@ const ControllerDrawer = ({
       setSensorList([]);
     }
     setSensorCreation(false);
-  }, [edited, visible, cReset, cSetValue]);
+  }, [edited, visible, con_ip, cReset, cSetValue]);
+
+  useEffect(() => {
+    if (visible && con_ip) {
+      refetch();
+    }
+  }, [visible, con_ip, refetch]);
+
+  useEffect(() => {
+    if (
+      isAddError ||
+      isAddSuccess ||
+      isDeleteError ||
+      isDeleteSuccess ||
+      isUpdateError ||
+      isUpdateSuccess
+    ) {
+      onOk();
+    }
+  }, [
+    isAddError,
+    isAddSuccess,
+    isDeleteError,
+    isDeleteSuccess,
+    isUpdateError,
+    isUpdateSuccess,
+    onOk,
+  ]);
 
   return (
     <Drawer
